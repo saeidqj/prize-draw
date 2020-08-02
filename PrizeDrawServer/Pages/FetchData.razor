@@ -1,0 +1,63 @@
+﻿@page "/about"
+
+@using PrizeDrawServer.Data
+@*@inject WeatherForecastService ForecastService
+    <h1>Weather forecast</h1>
+
+    <p>This component demonstrates fetching data from a service.</p>
+    <div>
+        <button type="button" id="btn1" @onclick="clicked">click me to load</button>
+    </div>
+    @if (forecasts == null)
+    {
+        <p><em>Loading...</em></p>
+
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temp. (C)</th>
+                    <th>Temp. (F)</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var forecast in forecasts)
+                {
+                    <tr>
+                        <td>@forecast.Date.ToShortDateString()</td>
+                        <td>@forecast.TemperatureC</td>
+                        <td>@forecast.TemperatureF</td>
+                        <td>@forecast.Summary</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <input type="text" @bind="pzcode" />
+
+    @code {
+        private WeatherForecast[] forecasts;
+        string pzcode { get; set; } = "";
+
+        protected override async Task OnInitializedAsync()
+        {
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        }
+        protected async Task clicked(MouseEventArgs me)
+        {
+            this.pzcode = "salam khedmate shoma";
+        }
+    }
+*@
+
+<div style="width:600px; margin:20px auto;">
+    <div class="row">
+        <div class="col-md-12"><h2 style="text-align:center"> کاری از</h2> </div>
+        <div class="col-md-12 text-center"><img src="/img/fun_news.jpg" class="mx-auto d-block" style="width:20em" /></div>
+        <div class="col-md-12"><h6 class="text-center">میاندوآب فان نیوز</h6></div>
+    </div>
+</div>

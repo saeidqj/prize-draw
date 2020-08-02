@@ -1,0 +1,224 @@
+﻿@page "/"
+@inject PrizeDrawServer.Data.PersonFactory pfactory
+@{
+
+}
+@*old code
+    <div class="row form-row">
+        <form>
+            <div class="form-group">
+                <label class="col-form-label">نام شما</label>
+                <input type="text" class="form-control" @bind="ps.Name" />
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">نام خانوادگی شما</label>
+                <input type="text" class="form-control" @bind="ps.Family" />
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">شماره تلفن همرا</label>
+                <input type="text" class="form-control" @bind="ps.Phone" />
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">آی دی اینستاگرام</label>
+                <input type="text" class="form-control" @bind="ps.InstaId" />
+            </div>
+            <div class="col-12 text-center">
+                <input type="button" id="btn1" class="btn btn-danger" @onclick="btnClicked" value="@btnTitle" />
+            </div>
+            <div class="col-12 text-center">
+                <label class="alert @_class">@pzCode</label>
+            </div>
+        </form>
+    </div>
+
+*@
+<!-- Mixins-->
+<!-- Pen Title-->
+<div class="pen-title">
+    <h1>ثبت نام در قرعه کشی ASA</h1><span>کاری  <i class='fa fa-code'></i> از <a href='http://miandoabmedia.com'>گروه تبلیغات آسا</a></span>
+</div>
+
+@*------old----
+    <div class="container">
+        <div class="card"></div>
+        <div class="card">
+            <h1 class="title">مشخصات شما</h1>
+            <EditForm Model="@ps">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="input-container">
+                    <input type="text" id="name" @bind-value="ps.Name" />
+                    <label for="name">نام شما</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="family" @bind-value="ps.Family" />
+                    <label for="family">اسم فامیلی </label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="phone" @bind-value="ps.Phone" />
+                    <label for="phone">شماره تلفن  </label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="iid" @bind-value="ps.InstaId" />
+                    <label for="iid">آیدی اینستا </label>
+                    <div class="bar"></div>
+                </div>
+                <div class="button-container">
+                    <button type="button" ><span>ثبت اطلاعات</span></button>
+                </div>
+            </EditForm>
+                </div>
+                <div class="card alt">
+                    <div class="toggle"></div>
+                    <h1 class="title">
+                        Register
+                        <div class="close"></div>
+                    </h1>
+                    <form>
+                        <div class="input-container">
+                            <input type="#{type}" id="#{label}" required="required" />
+                            <label for="#{label}">Username</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input type="#{type}" id="#{label}" required="required" />
+                            <label for="#{label}">Password</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input type="#{type}" id="#{label}" required="required" />
+                            <label for="#{label}">Repeat Password</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="button-container">
+                            <button><span>Next</span></button>
+                        </div>
+                    </form>
+                </div>
+
+
+    </div>
+*@
+<div class="container">
+    <div class="card"></div>
+    <div class="card">
+        <h1 class="title">مشخصات شما</h1>
+        <EditForm EditContext="@editContext" OnSubmit="btnClicked">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="input-container">
+                <input type="text" id="name" @bind-value="ps.Name" />
+                <label for="name">نام شما</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="family" @bind-value="ps.Family" />
+                <label for="family">اسم فامیلی </label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="phone" @bind-value="ps.Phone" />
+                <label for="phone">شماره تلفن  </label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="iid" @bind-value="ps.InstaId" />
+                <label for="iid">آیدی اینستا </label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button type="submit"><span>@btnTitle</span></button>
+            </div>
+            <div class="col-12 text-center">
+                <label class="alert @_class">@pzCode</label>
+            </div>
+        </EditForm>
+    </div>
+    @*--no neeeded
+    <div class="card alt">
+        <div class="toggle"></div>
+        <h1 class="title">
+            Register
+            <div class="close"></div>
+        </h1>
+        <form>
+            <div class="input-container">
+                <input type="#{type}" id="#{label}" required="required" />
+                <label for="#{label}">Username</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{type}" id="#{label}" required="required" />
+                <label for="#{label}">Password</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{type}" id="#{label}" required="required" />
+                <label for="#{label}">Repeat Password</label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button><span>Next</span></button>
+            </div>
+        </form>
+    </div>
+    *@
+</div>
+<!-- Portfolio--><a id="portfolio" href="/" title="میاندوآب مدیا"><i class="fa fa-link"></i></a>
+<!-- CodePen--><a id="codepen" href="http://www.instagram.com/miandoab_fun_news1" title="ما رو دنبال کنید"><i class="fa fa-codepen"></i></a>
+
+@code{
+    string btnTitle = "ثبت نام در قرعه کشی";
+    string pzCode = "";
+    string _class = "";
+    private EditContext editContext;
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(ps);
+    }
+    PrizeDraw.Data.Models.Person ps = new PrizeDraw.Data.Models.Person();
+    /// <summary>
+    /// a flag
+    /// </summary>
+    bool _new = true;
+
+    private async Task btnClicked()
+    {
+        if (!editContext.Validate())
+        {
+            return;
+        }
+        _class = "hide";
+        if (_new)
+        {
+
+            var res = pfactory.RegisterUserNdGetCode(ps);
+            if (res.Successed)
+            {
+                pzCode = res.PrizeCode;
+                btnTitle = "ثبت نام جدید";
+                _class = "bg-success";
+                _new = false;
+            }
+            else
+            {
+                pzCode = res.ErrorMessage;
+                _class = "bg-warning";
+            }
+
+
+        }
+        else
+        {
+            btnTitle = "ثبت نام در قرعه کشی";
+            ps = new PrizeDraw.Data.Models.Person();
+            _new = true;
+
+        }
+    }
+}
+
+
