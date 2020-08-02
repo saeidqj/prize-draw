@@ -8,7 +8,7 @@ using PrizeDraw.Data.DataLayer;
 namespace PrizeDraw.Data.Migrations
 {
     [DbContext(typeof(PZDataContext))]
-    [Migration("20200802202042_first")]
+    [Migration("20200802203208_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
