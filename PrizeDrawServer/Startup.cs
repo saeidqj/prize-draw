@@ -13,6 +13,7 @@ using PrizeDrawServer.Data;
 using PrizeDraw.Data.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using PrizeDraw.Data.Services;
+using MySql.Data.EntityFrameworkCore;
 
 namespace PrizeDrawServer
 {
@@ -29,6 +30,19 @@ namespace PrizeDrawServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrizeDraw;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+#region mysql
+var Host= "sql12.freesqldatabase.com";
+var Database_name= "sql12358245";
+var Database_user="sql12358245";
+var Database_password="cbZVdGXYCk";
+var Port_number= "3306";
+ connectionString = "SERVER=" + Host + ";" + "DATABASE=" +
+Database_name + ";" + "UID=" + Database_user + ";" + "PASSWORD=" + Database_password + ";";
+#endregion
+
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
@@ -36,7 +50,8 @@ namespace PrizeDrawServer
                 //miandoab_prize
                 //@,Egx=y6EZ2v
                 DbContextOptionsBuilder<PZDataContext> builder = new DbContextOptionsBuilder<PZDataContext>();
-                builder.UseSqlServer(connectionString: @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrizeDraw;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                //builder.UseSqlServer(connectionString);
+                builder.UseMySQL(connectionString);
                 return new PZDataContext(builder.Options);
 
             });
