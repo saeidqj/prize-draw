@@ -72,7 +72,11 @@ namespace PrizeDrawServer
             });*/
             services.AddDbContext<PZDataContext>(x => {
                 //x.UseSqlite(sqlitecnstr, x => x.MigrationsAssembly("PrizeDrawServer"));
-              //  x.UseSqlServer(@"Data Source=.\MSSQLSERVER2012;Initial Catalog=admin_miandoab;User ID=admin_miandoab;Password=q49Ob&5;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", t=>t.MigrationsAssembly("PrizeDrawServer"));
+                //  x.UseSqlServer(@"Data Source=.\MSSQLSERVER2012;Initial Catalog=admin_miandoab;User ID=admin_miandoab;Password=q49Ob&5;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", t=>t.MigrationsAssembly("PrizeDrawServer"));
+                if (cnstr == "SqlServer")
+                    x.UseSqlServer(cnstr, t => t.MigrationsAssembly("PrizeDrawServer"));
+                else 
+                    x.UseSqlite(cnstr,t=> t.MigrationsAssembly("PrizeDrawServer"));
 
             }, ServiceLifetime.Singleton);
             services.AddScoped<IPrizeCodeService>(p => {
