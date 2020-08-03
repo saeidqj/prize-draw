@@ -25,9 +25,11 @@ namespace PrizeDraw.Data.Services
                 throw new PropertyIsRepititive(nameof(Person.Phone), "شماره تلفن");
             if (dbContext.Persons.Any(m => m.InstaId == prsn.InstaId))
                 throw new PropertyIsRepititive(nameof(Person.InstaId), "آیدی اینستا");
+            var count = dbContext.Persons.Count() + 5317;
            /* if (dbContext.Persons.Any(m => m.Phone == prsn.Phone))
                 throw new PropertyIsRepititive(nameof(Person.), "شماره تلفن");*/
             var entry =  dbContext.Persons.Add(new Person {
+             Id = count,
              Family = prsn.Family,
              InstaId= prsn.InstaId,
              Name= prsn.Name,
